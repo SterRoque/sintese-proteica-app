@@ -13,9 +13,15 @@ import { Button } from '../components/Button';
 import { Tabs } from 'expo-router';
 import logo from '@/src/assets/images/logo.png';
 import { useState } from 'react';
+import { dnaGenerator } from '../utils/dna-generator';
 
 export default function Sintese() {
-   const [inputText, setInputText] = useState<string>();
+   const [inputText, setInputText] = useState<string>('');
+
+   function handleGenerateDNA() {
+      const dna = dnaGenerator();
+      setInputText(dna);
+   }
 
    return (
       <VStack
@@ -43,7 +49,8 @@ export default function Sintese() {
             <HStack justifyContent='space-between'>
                <Text
                   fontWeight={700}
-                  color='blue.500'>
+                  color='blue.500'
+                  onPress={handleGenerateDNA}>
                   Gerar fita
                </Text>
                <Text
