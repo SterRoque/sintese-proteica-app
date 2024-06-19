@@ -5,6 +5,7 @@ import logo from '@/src/assets/images/logo.png';
 import { useState } from 'react';
 import { dnaGenerator } from '../utils/dna-generator';
 import { PathEnum } from '../constants/path-enum';
+import { Input } from '../components/Input';
 
 export default function Sintese() {
    const router = useRouter();
@@ -24,7 +25,7 @@ export default function Sintese() {
          />
 
          <View className='w-[90%] mt-12 mb-20'>
-            <TextInput
+            <Input
                placeholder='Digite a fita de DNA'
                value={inputText}
                onChangeText={(text) => setInputText(text)}
