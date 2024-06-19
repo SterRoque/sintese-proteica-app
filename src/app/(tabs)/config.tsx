@@ -1,9 +1,9 @@
-import { Box, Text } from "native-base";
+import { Text, View } from 'react-native';
 
 export default function Config() {
-  return (
-    <Box flex={1} bg="red.100" h="400px" w="400px">
-      <Text>oiii</Text>
-    </Box>
-  );
+   return (
+      <View>
+         <Text>oiii</Text>
+      </View>
+   );
 }

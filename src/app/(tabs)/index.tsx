@@ -1,4 +1,3 @@
-import { Box, Center, Image, Text } from 'native-base';
 import { Button } from '../../components/Button';
 import logoHome from '../../assets/images/logo-home.png';
 import { Animated, View } from 'react-native';

@@ -1,9 +1,23 @@
-import { Tabs } from "expo-router";
+import { Tabs } from 'expo-router';
 export default function TabLayout() {
-  return (
-    <Tabs>
-      <Tabs.Screen name="index" options={{ title: "Inicio" }} />
-      <Tabs.Screen name="config" options={{ title: "Configuração" }} />
-    </Tabs>
-  );
+   return (
+      <Tabs>
+         <Tabs.Screen
+            name='index'
+            options={{
+               title: 'Inicio',
+               headerStyle: { backgroundColor: 'rgb(249 115 22)' },
+               headerTintColor: 'white',
+            }}
+         />
+         <Tabs.Screen
+            name='config'
+            options={{
+               title: 'Configuração',
+               headerStyle: { backgroundColor: 'rgb(249 115 22)' },
+               headerTintColor: 'white',
+            }}
+         />
+      </Tabs>
+   );
 }
