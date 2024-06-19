@@ -1,15 +1,20 @@
 import { Stack } from 'expo-router/stack';
 import { NativeBaseProvider, theme } from 'native-base';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function Layout() {
    return (
-      <NativeBaseProvider theme={theme}>
+      <SafeAreaProvider>
          <Stack>
             <Stack.Screen
                name='(tabs)'
                options={{ headerShown: false }}
             />
+            <Stack.Screen
+               name='dna-replication'
+               options={{ title: 'Replicação do DNA' }}
+            />
          </Stack>
-      </NativeBaseProvider>
+      </SafeAreaProvider>
    );
 }

@@ -1,21 +1,14 @@
-import {
-   Box,
-   Center,
-   HStack,
-   Image,
-   Input,
-   Link,
-   Stack,
-   Text,
-   VStack,
-} from 'native-base';
+import { Image, TextInput, Text, View } from 'react-native';
 import { Button } from '../components/Button';
-import { Tabs } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
 import logo from '@/src/assets/images/logo.png';
 import { useState } from 'react';
 import { dnaGenerator } from '../utils/dna-generator';
+import { PathEnum } from '../constants/path-enum';
 
 export default function Sintese() {
+   const router = useRouter();
+
    const [inputText, setInputText] = useState<string>('');
 
    function handleGenerateDNA() {
@@ -24,54 +17,43 @@ export default function Sintese() {
    }
 
    return (
-      <VStack
-         w='100%'
-         h='full'
-         alignItems='center'>
+      <View className='flex w-full h-full items-center'>
          <Image
             source={logo}
-            alt='logo principal'
-            w={120}
-            h={120}
-            mt='50px'
+            className='w-32 h-32 mt-12'
          />
 
-         <Box
-            w='90%'
-            mt='50px'
-            mb='80px'>
-            <Input
+         <View className='w-[90%] mt-12 mb-20'>
+            <TextInput
                placeholder='Digite a fita de DNA'
                value={inputText}
                onChangeText={(text) => setInputText(text)}
-               mb='10px'
+               className='mb-3'
             />
-            <HStack justifyContent='space-between'>
+            <View className='flex justify-between flex-row'>
                <Text
-                  fontWeight={700}
-                  color='blue.500'
+                  className='font-bold text-blue-600'
                   onPress={handleGenerateDNA}>
                   Gerar fita
                </Text>
                <Text
-                  fontWeight={700}
-                  color='error.500'
+                  className='font-bold text-red-600'
                   onPress={() => setInputText('')}>
                   Limpar
                </Text>
-            </HStack>
-         </Box>
+            </View>
+         </View>
 
-         <Box
-            w='100%'
-            alignItems='center'
-            gap='10px'>
-            <Button title='Duplicação' />
+         <View className='flex w-full gap-3 items-center'>
+            <Button
+               title='Duplicação'
+               onPress={() => router.push(PathEnum.REPLICATION)}
+            />
             <Button title='Transcrição' />
             <Button title='Tradução' />
-         </Box>
+         </View>
 
          <Tabs />
-      </VStack>
+      </View>
    );
 }

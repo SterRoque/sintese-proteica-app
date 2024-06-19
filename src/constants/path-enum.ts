@@ -1,5 +1,7 @@
 export enum PathEnum {
-  HOME = "/",
-  CONTEUDO = "/conteudo",
-  SINTESE = "/sintese",
+   HOME = '/',
+   CONTENT = '/content',
+   SINTESE = '/sintese',
+
+   REPLICATION = '/dna-replication',
 }

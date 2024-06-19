@@ -1,28 +1,18 @@
-import React from "react";
-import { Button as ButtonUI, Text, IButtonProps } from "native-base";
-import { opacity } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
+import React from 'react';
+import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 
-interface ButtonProps extends IButtonProps {
-  title: string;
+interface ButtonProps extends TouchableOpacityProps {
+   title: string;
 }
 
 export function Button({ title, ...rest }: ButtonProps) {
-  return (
-    <ButtonUI
-      rounded="16px"
-      w="full"
-      h="45px"
-      maxW="250px"
-      bg="warning.400"
-      _pressed={{
-        bg: "warning.500",
-        opacity: 0.7,
-      }}
-      {...rest}
-    >
-      <Text color="white" fontWeight={600} fontSize="15px">
-        {title}
-      </Text>
-    </ButtonUI>
-  );
+   return (
+      <TouchableOpacity
+         className='rounded-2xl w-full h-11 max-w-[250px] bg-orange-500 justify-center'
+         {...rest}>
+         <Text className='text-white font-semibold text-sm text-center'>
+            {title}
+         </Text>
+      </TouchableOpacity>
+   );
 }
