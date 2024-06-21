@@ -8,9 +8,9 @@ interface ButtonProps extends TouchableOpacityProps {
 export function Button({ title, ...rest }: ButtonProps) {
    return (
       <TouchableOpacity
-         className='rounded-2xl w-full h-11 max-w-[250px] bg-orange-500 justify-center'
+         className='flex rounded-2xl w-full h-11 max-w-[250px] bg-orange-500 justify-center'
          {...rest}>
-         <Text className='text-white font-semibold text-sm text-center'>
+         <Text className='text-white font-semibold text-sm text-center w-full'>
             {title}
          </Text>
       </TouchableOpacity>
