@@ -16,26 +16,26 @@ export default function Sintese() {
 
    function handleGenerateDNA() {
       dnaUpdate(dnaGenerator());
-      handleSaveDNA(dna);
+      // handleSaveDNA(dna);
    }
 
-   async function handleSaveDNA(dna: any) {
-      try {
-         const dnaListStorage = await AsyncStorage.getItem('dnaListKey');
+   // async function handleSaveDNA(dna: any) {
+   //    try {
+   //       const dnaListStorage = await AsyncStorage.getItem('dnaListKey');
 
-         if (dnaListStorage) {
-            const dnaList = [...JSON.parse(dnaListStorage), dna];
+   //       if (dnaListStorage) {
+   //          const dnaList = [...JSON.parse(dnaListStorage), dna];
 
-            await AsyncStorage.setItem('dnaListKey', JSON.stringify(dnaList));
+   //          await AsyncStorage.setItem('dnaListKey', JSON.stringify(dnaList));
 
-            return;
-         }
+   //          return;
+   //       }
 
-         await AsyncStorage.setItem('dnaListKey', JSON.stringify([dna]));
-      } catch (e) {
-         console.log(e);
-      }
-   }
+   //       await AsyncStorage.setItem('dnaListKey', JSON.stringify([dna]));
+   //    } catch (e) {
+   //       console.log(e);
+   //    }
+   // }
 
    return (
       <View className='flex w-full h-full items-center'>
