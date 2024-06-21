@@ -21,10 +21,6 @@ export function dnaGenerator() {
    baseStr = baseStr.replace(regexTAC, `$1${'TAC'}`);
    baseStr = baseStr.replace(regexStop, `$1${baseStop[randStop]}`);
 
-   console.log(
-      `FITA: ${baseStr}, \nINDEX-TAC: ${indexTAC}, INDEX-STOP: ${indexStop}`,
-   );
-
    return baseStr;
 }
 
