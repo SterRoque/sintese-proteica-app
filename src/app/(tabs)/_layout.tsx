@@ -11,6 +11,14 @@ export default function TabLayout() {
             }}
          />
          <Tabs.Screen
+            name='history'
+            options={{
+               title: 'Historico',
+               headerStyle: { backgroundColor: 'rgb(249 115 22)' },
+               headerTintColor: 'white',
+            }}
+         />
+         <Tabs.Screen
             name='config'
             options={{
                title: 'Configuração',

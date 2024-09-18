@@ -6,6 +6,7 @@ import { dnaGenerator } from '../utils/dna-generator';
 import { PathEnum } from '../constants/path-enum';
 import { Input } from '../components/Input';
 import { useDnaStore } from '../store/useDnaStore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Sintese() {
    const router = useRouter();
@@ -13,26 +14,31 @@ export default function Sintese() {
    const { dna, dnaUpdate } = useDnaStore();
 
    function handleGenerateDNA() {
-      dnaUpdate(dnaGenerator());
+      const newDNA = dnaGenerator();
+
+      dnaUpdate(newDNA);
+      handleSaveDNA(newDNA);
    }
 
-   // async function handleSaveDNA(dna: any) {
-   //    try {
-   //       const dnaListStorage = await AsyncStorage.getItem('dnaListKey');
+   async function handleSaveDNA(dna: string) {
+      try {
+         const dnaListStorage = await AsyncStorage.getItem('dnaListKey');
 
-   //       if (dnaListStorage) {
-   //          const dnaList = [...JSON.parse(dnaListStorage), dna];
+         console.log(dnaListStorage);
 
-   //          await AsyncStorage.setItem('dnaListKey', JSON.stringify(dnaList));
+         if (dnaListStorage) {
+            const dnaList = [...JSON.parse(dnaListStorage), dna];
 
-   //          return;
-   //       }
+            await AsyncStorage.setItem('dnaListKey', JSON.stringify(dnaList));
 
-   //       await AsyncStorage.setItem('dnaListKey', JSON.stringify([dna]));
-   //    } catch (e) {
-   //       console.log(e);
-   //    }
-   // }
+            return;
+         }
+
+         await AsyncStorage.setItem('dnaListKey', JSON.stringify([dna]));
+      } catch (e) {
+         console.log(e);
+      }
+   }
 
    return (
       <View className='flex w-full h-full items-center'>
