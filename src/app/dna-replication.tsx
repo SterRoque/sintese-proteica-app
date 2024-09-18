@@ -5,16 +5,38 @@ import { Button } from '../components/Button';
 import { useState } from 'react';
 import { Input } from '../components/Input';
 import { Keyboard } from '../components/Keyboard';
+import { ModalValidDuplication } from '../components/ModalValidDuplication';
+import { ModalInvalidDuplication } from '../components/ModalInvalidDuplication';
 
 export default function DnaReplication() {
    const { dna } = useDnaStore();
    const [isAutoDuplicate, setIsAutoDuplicate] = useState(true);
    const [textInput, setTextInput] = useState('');
+   const [isOpenModalHelp, setIsOpenModalHelp] = useState(false);
+   const [isOpenModalValidDuplication, setIsOpenModalValidDuplication] =
+      useState(false);
+   const [isOpenModalInvalidDuplication, setIsOpenModalInvalidDuplication] =
+      useState(false);
 
    const dnaReplic = dnaReplication(dna);
 
-   console.log(dna.length);
-   console.log(dnaReplic.length);
+   function handleDnaDuplicate() {
+      validDuplication();
+   }
+
+   function validDuplication() {
+      if (textInput === dnaReplic) {
+         setIsOpenModalValidDuplication(true);
+      } else {
+         setIsOpenModalInvalidDuplication(true);
+      }
+   }
+   function handleCloseModalValidDuplication() {
+      setIsOpenModalValidDuplication(false);
+   }
+   function handleCloseModalInvalidDuplication() {
+      setIsOpenModalInvalidDuplication(false);
+   }
 
    return (
       <View className='w-full items-center px-[5%] pt-8'>
@@ -35,7 +57,7 @@ export default function DnaReplication() {
             <>
                <Text className='text-blue-500 text-lg font-bold text-center mt-12'>
                   Fita de DNA: {'\n'}
-                  <Text className='text-xl'>{dna}</Text>
+                  <Text className='text-xl'>{dna.toUpperCase()}</Text>
                </Text>
                <Text className='text-blue-500 text-lg font-bold mt-4 text-center'>
                   Fita de DNA Replicada: {'\n'}
@@ -50,8 +72,9 @@ export default function DnaReplication() {
                <Input
                   placeholder='Faça a replicação do DNA'
                   value={textInput}
+                  editable={false}
                   onChangeText={(text) => setTextInput(text)}
-                  className='font-bold text-lg max-h-16'
+                  className='font-bold text-lg max-h-16 text-red-600'
                />
                <View className='mt-11'>
                   <Keyboard
@@ -62,6 +85,24 @@ export default function DnaReplication() {
                      }
                   />
                </View>
+
+               <Button
+                  title='Duplicar'
+                  className='self-center max-w-[120px] mt-5'
+                  onPress={handleDnaDuplicate}
+               />
+               <ModalValidDuplication
+                  isOpen={isOpenModalValidDuplication}
+                  onClose={handleCloseModalValidDuplication}
+                  textInput={textInput}
+               />
+               <ModalInvalidDuplication
+                  isOpen={isOpenModalInvalidDuplication}
+                  onClose={handleCloseModalInvalidDuplication}
+                  textInput={textInput}
+                  duplicationCorrect={dnaReplic}
+               />
+               {/* <Modal /> */}
             </View>
          )}
       </View>
