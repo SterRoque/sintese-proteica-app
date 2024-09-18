@@ -1,4 +1,4 @@
-import { Image, TextInput, Text, View } from 'react-native';
+import { Image, Text, View, ToastAndroid } from 'react-native';
 import { Button } from '../components/Button';
 import { Tabs, useRouter } from 'expo-router';
 import logo from '@/src/assets/images/logo.png';
@@ -7,17 +7,37 @@ import { PathEnum } from '../constants/path-enum';
 import { Input } from '../components/Input';
 import { useDnaStore } from '../store/useDnaStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Modal } from '../components/Modal';
+import { useState } from 'react';
+import { dnaValidationSTOP, dnaValidationTAC } from '../utils/dna-validation';
+import { ModalDnaValidate } from '../components/ModalDnaValidate';
 
 export default function Sintese() {
    const router = useRouter();
 
    const { dna, dnaUpdate } = useDnaStore();
+   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
    function handleGenerateDNA() {
       const newDNA = dnaGenerator();
 
       dnaUpdate(newDNA);
       handleSaveDNA(newDNA);
+   }
+
+   function handleDuplicate() {
+      if (!dna) {
+         ToastAndroid.show(
+            'Digite ou gere uma fita de DNA',
+            ToastAndroid.SHORT,
+         );
+         return;
+      }
+
+      if (dnaValidate()) {
+         handleSaveDNA(dna);
+         router.push(PathEnum.REPLICATION);
+      }
    }
 
    async function handleSaveDNA(dna: string) {
@@ -40,6 +60,34 @@ export default function Sintese() {
       }
    }
 
+   function dnaValidate() {
+      const fitaInvalidaTAC =
+         dnaValidationTAC(dna).message === 'TAC não encontrado';
+      const fitaInvalidaSTOP =
+         dnaValidationSTOP(dna).message === 'condição não encontrada';
+      const fitaValidaTAC = dnaValidationTAC(dna).message === 'TAC encontrado';
+      const fitaValidaSTOP =
+         dnaValidationSTOP(dna).message === 'condição encontrada';
+
+      const fitaInvalida =
+         (fitaInvalidaTAC && fitaInvalidaSTOP) ||
+         (fitaValidaTAC && fitaInvalidaSTOP) ||
+         (fitaInvalidaTAC && fitaValidaSTOP);
+
+      console.log(fitaInvalida);
+
+      if (fitaInvalida) {
+         setIsOpenModal(true);
+         return false;
+      }
+
+      return true;
+   }
+
+   function handleCloseModal() {
+      setIsOpenModal(false);
+   }
+
    return (
       <View className='flex w-full h-full items-center'>
          <Image
@@ -51,7 +99,7 @@ export default function Sintese() {
             <Input
                placeholder='Digite a fita de DNA'
                value={dna}
-               onChangeText={(text) => dnaUpdate(text)}
+               onChangeText={(text) => dnaUpdate(text.toUpperCase())}
             />
 
             <Text
@@ -64,12 +112,16 @@ export default function Sintese() {
          <View className='flex w-full gap-3 items-center'>
             <Button
                title='Duplicação'
-               onPress={() => router.push(PathEnum.REPLICATION)}
+               onPress={handleDuplicate}
             />
             <Button title='Transcrição' />
             <Button title='Tradução' />
          </View>
 
+         <ModalDnaValidate
+            isOpen={isOpenModal}
+            onClose={handleCloseModal}
+         />
          <Tabs />
       </View>
    );
