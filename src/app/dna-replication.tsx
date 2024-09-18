@@ -11,9 +11,10 @@ export default function DnaReplication() {
    const [isAutoDuplicate, setIsAutoDuplicate] = useState(true);
    const [textInput, setTextInput] = useState('');
 
-   const baseDnaReplication = ['A', 'T', 'C', 'G'];
-
    const dnaReplic = dnaReplication(dna);
+
+   console.log(dna.length);
+   console.log(dnaReplic.length);
 
    return (
       <View className='w-full items-center px-[5%] pt-8'>
@@ -34,11 +35,11 @@ export default function DnaReplication() {
             <>
                <Text className='text-blue-500 text-lg font-bold text-center mt-12'>
                   Fita de DNA: {'\n'}
-                  <Text>{dna}</Text>
+                  <Text className='text-xl'>{dna}</Text>
                </Text>
                <Text className='text-blue-500 text-lg font-bold mt-4 text-center'>
                   Fita de DNA Replicada: {'\n'}
-                  <Text>{dnaReplic}</Text>
+                  <Text className='text-xl'>{dnaReplic}</Text>
                </Text>
             </>
          ) : (
@@ -54,7 +55,7 @@ export default function DnaReplication() {
                />
                <View className='mt-11'>
                   <Keyboard
-                     valueArray={baseDnaReplication}
+                     valueArray={['A', 'T', 'C', 'G']}
                      onKeyPress={(text) => setTextInput((prev) => prev + text)}
                      onRemove={() =>
                         setTextInput((prev) => prev.slice(0, prev.length - 1))
