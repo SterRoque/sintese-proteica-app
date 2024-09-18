@@ -2,12 +2,10 @@ import { Image, TextInput, Text, View } from 'react-native';
 import { Button } from '../components/Button';
 import { Tabs, useRouter } from 'expo-router';
 import logo from '@/src/assets/images/logo.png';
-import { useState } from 'react';
 import { dnaGenerator } from '../utils/dna-generator';
 import { PathEnum } from '../constants/path-enum';
 import { Input } from '../components/Input';
 import { useDnaStore } from '../store/useDnaStore';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Sintese() {
    const router = useRouter();
@@ -16,7 +14,6 @@ export default function Sintese() {
 
    function handleGenerateDNA() {
       dnaUpdate(dnaGenerator());
-      // handleSaveDNA(dna);
    }
 
    // async function handleSaveDNA(dna: any) {
