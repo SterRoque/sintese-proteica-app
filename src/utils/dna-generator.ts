@@ -1,56 +1,43 @@
-export function dnaGenerator() {
+import { dnaValidation } from './dna-validation';
+
+export function dnaGenerator(): string {
    const base = ['A', 'T', 'C', 'G'];
    const baseStop = ['ATT', 'ATC', 'ACT'];
-   let baseStr = '';
+   let fitaBase = '';
+   let fitaArray: any = [];
+   let fitaValida = '';
 
-   let tam = Math.floor(Math.random() * (40 - 20 + 1)) + 20;
-   let randStop = Math.floor(Math.random() * 3);
-
-   for (let i = 0; i < tam; i++) {
-      const index = Math.floor(Math.random() * base.length);
-
-      baseStr = baseStr.concat(base[index]);
+   for (let i = 0; i < 30; i++) {
+      const index = gerarNumeroAleatorio(0, base.length - 1);
+      fitaBase = fitaBase.concat(base[index]);
    }
 
-   const indexTAC = getRandomIndexTAC(baseStr.length);
-   const indexStop = getRandomIndexStop(indexTAC, baseStr.length);
+   fitaValida =
+      dnaValidation(fitaArray, fitaBase, baseStop, addTAC, addBaseStop) ?? '';
 
-   const regexTAC = getRegex(indexTAC, 'TAC');
-   const regexStop = getRegex(indexStop, baseStop[randStop]);
+   console.log({
+      fitaValida,
+   });
 
-   baseStr = baseStr.replace(regexTAC, `$1${'TAC'}`);
-   baseStr = baseStr.replace(regexStop, `$1${baseStop[randStop]}`);
-
-   return baseStr;
+   return fitaValida;
 }
 
-function getRegex(index: number, caractere: string) {
-   return new RegExp(`(.{${index}}).{${caractere.length}}`);
+function gerarNumeroAleatorio(min: number, max: number) {
+   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getRandomIndexTAC(length: number) {
-   let indexTAC = 0;
+function addTAC(fitaArray: string[]) {
+   let indexAleatorio = gerarNumeroAleatorio(0, 3);
 
-   while (true) {
-      indexTAC = Math.floor(Math.random() * length - 6) + 0;
-      if (indexTAC > 0 && indexTAC % 3 === 0) {
-         break;
-      }
-   }
-
-   return indexTAC;
+   fitaArray[indexAleatorio] = 'TAC';
 }
-function getRandomIndexStop(indexTAC: number, length: number) {
-   let indexStop = 0;
 
-   while (true) {
-      indexStop =
-         Math.floor(Math.random() * (length - (indexTAC + 6) + 1)) +
-         (indexTAC + 6);
-      if (indexStop > indexTAC && indexStop % 3 === 0) {
-         break;
-      }
-   }
-
-   return indexStop;
+function addBaseStop(
+   fitaArray: string[],
+   indexTAC: number,
+   baseStop: string[],
+) {
+   let indexAleatorio = gerarNumeroAleatorio(indexTAC + 1, fitaArray.length);
+   const indexAleatorioStop = gerarNumeroAleatorio(0, baseStop.length - 1);
+   fitaArray[indexAleatorio] = baseStop[indexAleatorioStop];
 }
