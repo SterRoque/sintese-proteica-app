@@ -25,8 +25,6 @@ export default function Transcription() {
    }
 
    function validTranscription() {
-      console.log(textInput === mRNA);
-
       if (textInput) {
          if (textInput === mRNA) {
             setIsOpenModalValidTranscription(true);
