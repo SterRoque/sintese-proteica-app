@@ -5,6 +5,7 @@ import {
    Alert,
    Clipboard,
    FlatList,
+   ScrollView,
    Text,
    ToastAndroid,
    TouchableOpacity,
@@ -94,12 +95,11 @@ export default function History() {
             Historico de Fitas DNA
          </Text>
 
-         <FlatList
-            data={dnaArray}
-            className='mt-4'
-            keyExtractor={(item) => item}
-            renderItem={({ item, index }) => (
-               <View className='flex-row justify-between items-center h-12  border-b border-red-200 px-4'>
+         <ScrollView className='mt-4'>
+            {dnaArray.map((item, index) => (
+               <View
+                  className='flex-row justify-between items-center h-12  border-b border-red-200 px-4'
+                  key={index}>
                   <TouchableOpacity
                      className='h-12 justify-center'
                      onPress={() => redirectToHomeWithDNA(item)}>
@@ -127,8 +127,9 @@ export default function History() {
                      </TouchableOpacity>
                   </View>
                </View>
-            )}
-         />
+            ))}
+         </ScrollView>
+
          <Button
             title='Excluir tudo'
             onPress={cleanHistory}
