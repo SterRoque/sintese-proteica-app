@@ -27,7 +27,7 @@ export default function Sintese() {
       handleSaveDNA(newDNA);
    }
 
-   async function handleDuplicate() {
+   async function handleValidateDNA(path: string) {
       if (!dna) {
          ToastAndroid.show(
             'Digite ou gere uma fita de DNA',
@@ -40,7 +40,7 @@ export default function Sintese() {
 
       if (dnaValidate()) {
          await handleSaveDNA(dna);
-         router.push(PathEnum.REPLICATION);
+         router.push(path);
       }
       closePreloader();
    }
@@ -117,11 +117,11 @@ export default function Sintese() {
          <View className='flex w-full gap-3 items-center'>
             <Button
                title='Duplicação'
-               onPress={handleDuplicate}
+               onPress={() => handleValidateDNA(PathEnum.REPLICATION)}
             />
             <Button
                title='Transcrição'
-               onPress={() => router.push(PathEnum.TRANSCRIPTION)}
+               onPress={() => handleValidateDNA(PathEnum.TRANSCRIPTION)}
             />
             <Button title='Tradução' />
          </View>
