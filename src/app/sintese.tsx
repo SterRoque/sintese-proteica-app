@@ -114,7 +114,10 @@ export default function Sintese() {
                title='Duplicação'
                onPress={handleDuplicate}
             />
-            <Button title='Transcrição' />
+            <Button
+               title='Transcrição'
+               onPress={() => router.push(PathEnum.TRANSCRIPTION)}
+            />
             <Button title='Tradução' />
          </View>
 

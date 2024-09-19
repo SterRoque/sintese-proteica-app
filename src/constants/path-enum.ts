@@ -4,4 +4,5 @@ export enum PathEnum {
    SINTESE = '/sintese',
 
    REPLICATION = '/dna-replication',
+   TRANSCRIPTION = '/dna-transcription',
 }
