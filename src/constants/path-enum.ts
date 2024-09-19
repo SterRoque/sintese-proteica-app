@@ -3,6 +3,7 @@ export enum PathEnum {
    CONTENT = '/content',
    SINTESE = '/sintese',
 
-   REPLICATION = '/dna-replication',
-   TRANSCRIPTION = '/dna-transcription',
+   REPLICATION = '/replication',
+   TRANSCRIPTION = '/transcription',
+   TRANSLATION = '/translation',
 }

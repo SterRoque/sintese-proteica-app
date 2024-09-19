@@ -8,7 +8,7 @@ import { dnaTranscription } from '../utils/dna-transcription';
 import { ModalValidTranscription } from '../components/ModalValidTranscription';
 import { ModalInvalidTranscription } from '../components/ModalInvalidTranscription';
 
-export default function DnaTranscription() {
+export default function Transcription() {
    const { dna } = useDnaStore();
    const mRNA = dnaTranscription(dna);
    const [isAutoTranscription, setIsAutoTranscription] = useState(true);

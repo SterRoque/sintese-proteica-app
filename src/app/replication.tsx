@@ -8,7 +8,7 @@ import { Keyboard } from '../components/Keyboard';
 import { ModalValidDuplication } from '../components/ModalValidDuplication';
 import { ModalInvalidDuplication } from '../components/ModalInvalidDuplication';
 
-export default function DnaReplication() {
+export default function Replication() {
    const { dna } = useDnaStore();
    const [isAutoDuplicate, setIsAutoDuplicate] = useState(true);
    const [textInput, setTextInput] = useState('');
