@@ -8,7 +8,7 @@ import { Input } from '../components/Input';
 import { useDnaStore } from '../store/useDnaStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Modal } from '../components/Modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { dnaValidationSTOP, dnaValidationTAC } from '../utils/dna-validation';
 import { ModalDnaValidate } from '../components/ModalDnaValidate';
 import { usePreloader } from '../hooks/usePreloader';
@@ -49,8 +49,6 @@ export default function Sintese() {
       try {
          const dnaListStorage = await AsyncStorage.getItem('dnaListKey');
 
-         console.log(dnaListStorage);
-
          if (dnaListStorage) {
             const dnaList = [...JSON.parse(dnaListStorage), dna];
 
@@ -78,8 +76,6 @@ export default function Sintese() {
          (fitaInvalidaTAC && fitaInvalidaSTOP) ||
          (fitaValidaTAC && fitaInvalidaSTOP) ||
          (fitaInvalidaTAC && fitaValidaSTOP);
-
-      console.log(fitaInvalida);
 
       if (fitaInvalida) {
          setIsOpenModal(true);
