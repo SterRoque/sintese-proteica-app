@@ -4,10 +4,20 @@ import { Animated, View } from 'react-native';
 import { useEffect, useRef } from 'react';
 import { Link, useRouter } from 'expo-router';
 import { PathEnum } from '@/src/constants/path-enum';
+import { useDnaStore } from '@/src/store/useDnaStore';
 
 export default function Home() {
    const router = useRouter();
    const scaleAnimation = useRef(new Animated.Value(1)).current;
+
+   const { dna, dnaUpdate } = useDnaStore();
+
+   function handleNavigateToSinteseDNA() {
+      if (dna) {
+         dnaUpdate('');
+      }
+      router.push(PathEnum.SINTESE);
+   }
 
    useEffect(() => {
       Animated.loop(
@@ -55,7 +65,7 @@ export default function Home() {
 
          <Button
             title='Sintese Proteica'
-            onPress={() => router.push(PathEnum.SINTESE)}
+            onPress={handleNavigateToSinteseDNA}
          />
       </View>
    );
