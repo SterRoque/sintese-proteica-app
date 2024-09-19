@@ -11,12 +11,14 @@ import { Modal } from '../components/Modal';
 import { useState } from 'react';
 import { dnaValidationSTOP, dnaValidationTAC } from '../utils/dna-validation';
 import { ModalDnaValidate } from '../components/ModalDnaValidate';
+import { usePreloader } from '../hooks/usePreloader';
 
 export default function Sintese() {
    const router = useRouter();
 
    const { dna, dnaUpdate } = useDnaStore();
    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+   const { openPreloader, closePreloader } = usePreloader();
 
    function handleGenerateDNA() {
       const newDNA = dnaGenerator();
@@ -25,7 +27,7 @@ export default function Sintese() {
       handleSaveDNA(newDNA);
    }
 
-   function handleDuplicate() {
+   async function handleDuplicate() {
       if (!dna) {
          ToastAndroid.show(
             'Digite ou gere uma fita de DNA',
@@ -34,10 +36,13 @@ export default function Sintese() {
          return;
       }
 
+      openPreloader();
+
       if (dnaValidate()) {
-         handleSaveDNA(dna);
+         await handleSaveDNA(dna);
          router.push(PathEnum.REPLICATION);
       }
+      closePreloader();
    }
 
    async function handleSaveDNA(dna: string) {

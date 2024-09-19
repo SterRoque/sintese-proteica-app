@@ -1,6 +1,7 @@
 import { Stack } from 'expo-router/stack';
 import { View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Preloader } from '../components/Preloader';
 
 export default function Layout() {
    return (
@@ -26,6 +27,7 @@ export default function Layout() {
                }}
             />
          </Stack>
+         <Preloader />
       </SafeAreaProvider>
    );
 }

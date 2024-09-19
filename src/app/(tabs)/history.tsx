@@ -16,20 +16,32 @@ import { Button } from '@/src/components/Button';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useDnaStore } from '@/src/store/useDnaStore';
 import { PathEnum } from '@/src/constants/path-enum';
+import { usePreloader } from '@/src/hooks/usePreloader';
+
+async function fakePromise() {
+   return new Promise((resolve, reject) => {
+      setTimeout(() => {
+         resolve(`ok`);
+      }, 5000);
+   });
+}
 
 export default function History() {
    const [dnaArray, setDnaArray] = useState([]);
 
    const { dnaUpdate } = useDnaStore();
 
+   const { openPreloader, closePreloader } = usePreloader();
+
    async function getDNA() {
       try {
+         openPreloader();
          const data = await AsyncStorage.getItem('dnaListKey');
 
          if (data) {
             setDnaArray(JSON.parse(data));
          }
-
+         closePreloader();
          console.log(data);
       } catch (err) {
          console.log(err);
@@ -55,10 +67,12 @@ export default function History() {
    }
    async function removeOneDNA(indexDNA: number) {
       try {
+         openPreloader();
          const newDnaArray = dnaArray.filter((_, index) => index !== indexDNA);
          setDnaArray(newDnaArray);
 
          await AsyncStorage.setItem('dnaListKey', JSON.stringify(newDnaArray));
+         closePreloader();
       } catch (e) {
          console.log(e);
       }
