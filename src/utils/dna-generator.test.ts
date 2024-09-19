@@ -7,7 +7,7 @@ function throwError() {
 
 describe('dnaGenerator', () => {
    test('Deve encontrar o TAC na fita', () => {
-      const result = splitIntoGroupsOfThree(dnaGenerator());
+      const result = splitIntoGroupsOfThree(dnaGenerator(), ' ');
       console.log('teste1', {
          result,
       });
@@ -15,7 +15,7 @@ describe('dnaGenerator', () => {
    });
 
    test('Deve encontrar um condição de parada, ATT, ACT ou ATC', () => {
-      const result = splitIntoGroupsOfThree(dnaGenerator());
+      const result = splitIntoGroupsOfThree(dnaGenerator(), ' ');
       const stop = ['ATT', 'ACT', 'ATC'];
       const containsStop = result
          .split(' ')

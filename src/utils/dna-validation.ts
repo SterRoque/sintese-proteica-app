@@ -10,7 +10,7 @@ type DnaValidationResponse = {
 };
 
 export function dnaValidationTAC(dna: string): DnaValidationResponse {
-   const fitaDNA = splitIntoGroupsOfThree(dna);
+   const fitaDNA = splitIntoGroupsOfThree(dna, ' ');
 
    if (fitaDNA.includes('TAC')) {
       return {
@@ -27,7 +27,7 @@ export function dnaValidationTAC(dna: string): DnaValidationResponse {
 
 export function dnaValidationSTOP(dna: string): DnaValidationResponse {
    const indexTAC = dna.indexOf('TAC');
-   const fitaDNA = splitIntoGroupsOfThree(dna.substring(indexTAC));
+   const fitaDNA = splitIntoGroupsOfThree(dna.substring(indexTAC), ' ');
    if (
       fitaDNA.includes('ATT') ||
       fitaDNA.includes('ACT') ||
@@ -57,7 +57,7 @@ export function dnaValidation(
 ) {
    let dnaValidationTACResult = dnaValidationTAC(fitaBase);
 
-   fitaArray = splitIntoGroupsOfThree(fitaBase).split(' ');
+   fitaArray = splitIntoGroupsOfThree(fitaBase, ' ').split(' ');
 
    if (dnaValidationTACResult.message === 'TAC não encontrado') {
       addTAC(fitaArray);
