@@ -10,6 +10,5 @@ export function dnaTranscription(dna: string) {
    for (let i = 0; i < dna.length; i++) {
       rna += complementaryBases[dna[i]];
    }
-   console.log(rna);
    return rna;
 }

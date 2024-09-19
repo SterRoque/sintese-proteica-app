@@ -42,7 +42,6 @@ export default function History() {
             setDnaArray(JSON.parse(data));
          }
          closePreloader();
-         console.log(data);
       } catch (err) {
          console.log(err);
       }

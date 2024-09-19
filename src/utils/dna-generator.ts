@@ -15,10 +15,6 @@ export function dnaGenerator(): string {
    fitaValida =
       dnaValidation(fitaArray, fitaBase, baseStop, addTAC, addBaseStop) ?? '';
 
-   console.log({
-      fitaValida,
-   });
-
    return fitaValida;
 }
 
