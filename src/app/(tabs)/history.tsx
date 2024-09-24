@@ -65,15 +65,16 @@ export default function History() {
       );
    }
    async function removeOneDNA(indexDNA: number) {
+      openPreloader();
       try {
-         openPreloader();
          const newDnaArray = dnaArray.filter((_, index) => index !== indexDNA);
          setDnaArray(newDnaArray);
 
          await AsyncStorage.setItem('dnaListKey', JSON.stringify(newDnaArray));
-         closePreloader();
       } catch (e) {
          console.log(e);
+      } finally {
+         closePreloader();
       }
    }
    async function cleanHistory() {

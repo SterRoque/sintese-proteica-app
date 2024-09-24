@@ -59,8 +59,8 @@ export const codonTable: { [key: string]: string } = {
    GAC: 'Asp',
    GAA: 'Glu',
    GAG: 'Glu',
-   GGU: 'Glic',
-   GGC: 'Glic',
-   GGA: 'Glic',
-   GGG: 'Glic',
+   GGU: 'Gli',
+   GGC: 'Gli',
+   GGA: 'Gli',
+   GGG: 'Gli',
 };

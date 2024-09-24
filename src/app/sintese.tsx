@@ -119,7 +119,10 @@ export default function Sintese() {
                title='Transcrição'
                onPress={() => handleValidateDNA(PathEnum.TRANSCRIPTION)}
             />
-            <Button title='Tradução' />
+            <Button
+               title='Tradução'
+               onPress={() => handleValidateDNA(PathEnum.TRANSLATION)}
+            />
          </View>
 
          <ModalDnaValidate

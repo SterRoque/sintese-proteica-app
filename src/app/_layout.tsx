@@ -21,9 +21,21 @@ export default function Layout() {
                options={{ headerShown: false }}
             />
             <Stack.Screen
-               name='dna-replication'
+               name='replication'
                options={{
                   title: 'Replicação do DNA',
+               }}
+            />
+            <Stack.Screen
+               name='transcription'
+               options={{
+                  title: 'Transcrição do DNA',
+               }}
+            />
+            <Stack.Screen
+               name='translation'
+               options={{
+                  title: 'Tradução do RNA',
                }}
             />
          </Stack>

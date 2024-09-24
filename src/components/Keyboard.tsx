@@ -29,27 +29,24 @@ export function Keyboard({
                <Key
                   word={word}
                   key={word}
-                  onPress={() => onKeyPress(word)}
+                  onPress={() =>
+                     onKeyPress(!hasAditionalKey ? word : word + ' ')
+                  }
                />
             ))}
             <View className='w-full flex-row'>
                {hasAditionalKey && (
                   <Key
                      word='-'
-                     className='w-[33.33%]'
+                     className='w-[50%]'
+                     onPress={() => onKeyPress('- ')}
                   />
                )}
                <Key
                   word='Remover'
                   onPress={() => onRemove()}
-                  className={hasAditionalKey ? 'w-[33.33%]' : 'w-full'}
+                  className={hasAditionalKey ? 'w-[50%]' : 'w-full'}
                />
-               {hasAditionalKey && (
-                  <Key
-                     word='FIM'
-                     className='w-[33.33%]'
-                  />
-               )}
             </View>
          </View>
       </View>

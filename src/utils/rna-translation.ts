@@ -34,6 +34,6 @@ export function rnaTranslation(rna: string) {
       startRNA: `${startRNA} `,
       middleRNA: middleRNA.join(' '),
       endRNA: ` ${endRNA}`,
-      aminoAcidSequence: splitIntoGroupsOfThree(aminoAcidSequence, ' - '),
+      aminoAcidSequence: aminoAcidSequence,
    };
 }
